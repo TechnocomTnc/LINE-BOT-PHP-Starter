@@ -27,7 +27,17 @@ $QQQdata = json_decode($QQQjson);
 $QQQisData=sizeof($QQQdata);
    
 $z = 0;
+foreach ($arrJson['events'] as $event){
+    $am = $event['message']['type'];	
+}
+if($am == 'sticker'){
+    $arrPostData = array();
+    $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+    $arrPostData['messages'][0]['type'] = "text";
+    $arrPostData['messages'][0]['text'] = 'เลายังอ่านติ้กเก้อมั่ยด้ายน้า';
 
+}
+if($am == 'text'){
     if (ereg("^น้องเน่จำนะ", $_msg) !== false) {
         // if (strpos($_msg, 'น้องเน่จำนะ') !== false) {
             $x_tra = str_replace("น้องเน่จำนะ","", $_msg);
@@ -197,6 +207,7 @@ $z = 0;
         // }
        
     }
+}
 
 $channel = curl_init();
 curl_setopt($channel, CURLOPT_URL,$strUrl);
